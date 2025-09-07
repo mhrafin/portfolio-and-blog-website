@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="{% block html_lang %}{{ DEFAULT_LANG }}{% endblock html_lang %}">
+
+<head>
+  {% block head %}
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            clifford: '#da373d',
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Flowbite CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}{{ SITENAME|striptags }}{% endblock title %}</title>
+  {% if SITESUBTITLE %}
+  <meta name="description" content="{{ SITESUBTITLE }}" />
+  {% endif %} {% endblock head %} {% block head_scripts %}{% endblock head_scripts %}
+
+  {% block style %}
+  {% endblock style %}
+</head>
+
+<body>
+  {% block body %}
+  <header>
+    {% block header %} {% endblock header %} {% block nav %}
+    <nav class="fixed w-full top-0 left-0 z-50 backdrop-blur-lg border-b border-blue-200/20">
+      <div class="mx-auto p-4 text-white font-bold">
+        Raf
+      </div>
+    </nav>
+    {% endblock nav %}
+  </header>
+  <main>
+    {% block content %}
+    {% endblock content %}
+  </main>
+  {% endblock body %}
+  {% block script %}
+  {% endblock script %}
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+</body>
+
+</html>

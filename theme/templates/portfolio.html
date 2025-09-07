@@ -1,0 +1,103 @@
+{% extends "base.html" %} {% block head_scripts %}
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+{% endblock head_scripts %} {% block style %}
+<style>
+  .animate-blink {
+    animation: blink 1s step-start infinite;
+  }
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+</style>
+{% endblock style %} {% block content %}
+<section id="hero" class="relative h-screen flex items-center justify-center">
+  <!-- Background image -->
+  <div
+    class="absolute inset-0 bg-cover bg-[20%_center]"
+    style="background-image: url('static/images/portfolio-bg.jpg')"></div>
+
+  <!-- Dark overlay -->
+  <div class="absolute inset-0 bg-black/90"></div>
+
+  <!-- Content -->
+  <div class="relative z-10 ml-auto text-right pr-6 md:pr-24">
+    <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4">
+      Mahedi Hassan Rafin
+    </h1>
+    <p
+      x-data="typedEffect()"
+      x-init="start()"
+      class="text-lg md:text-2xl text-gray-200">
+      I'm a <span x-text="current" class="underline decoration-primary-400"></span><span class="animate-blink">|</span>
+    </p>
+
+    <!-- Social Links -->
+    <div class="flex justify-end mt-6 text-white">
+      <a href="https://github.com/mhrafin" class="hover:text-primary-400">
+        <svg
+          class="w-[24px] h-[24px] md:w-[34px] md:h-[34px] lg:w-[44px] lg:h-[44px] text-gray-800 dark:text-white"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          fill="currentColor"
+          viewBox="0 0 24 24">
+          <path
+            fill-rule="evenodd"
+            d="M12.006 2a9.847 9.847 0 0 0-6.484 2.44 10.32 10.32 0 0 0-3.393 6.17 10.48 10.48 0 0 0 1.317 6.955 10.045 10.045 0 0 0 5.4 4.418c.504.095.683-.223.683-.494 0-.245-.01-1.052-.014-1.908-2.78.62-3.366-1.21-3.366-1.21a2.711 2.711 0 0 0-1.11-1.5c-.907-.637.07-.621.07-.621.317.044.62.163.885.346.266.183.487.426.647.71.135.253.318.476.538.655a2.079 2.079 0 0 0 2.37.196c.045-.52.27-1.006.635-1.37-2.219-.259-4.554-1.138-4.554-5.07a4.022 4.022 0 0 1 1.031-2.75 3.77 3.77 0 0 1 .096-2.713s.839-.275 2.749 1.05a9.26 9.26 0 0 1 5.004 0c1.906-1.325 2.74-1.05 2.74-1.05.37.858.406 1.828.101 2.713a4.017 4.017 0 0 1 1.029 2.75c0 3.939-2.339 4.805-4.564 5.058a2.471 2.471 0 0 1 .679 1.897c0 1.372-.012 2.477-.012 2.814 0 .272.18.592.687.492a10.05 10.05 0 0 0 5.388-4.421 10.473 10.473 0 0 0 1.313-6.948 10.32 10.32 0 0 0-3.39-6.165A9.847 9.847 0 0 0 12.007 2Z"
+            clip-rule="evenodd" />
+        </svg>
+      </a>
+      <a href="#" class="hover:text-primary-400">
+        <i class="bi bi-facebook text-2xl"></i>
+      </a>
+      <a href="#" class="hover:text-primary-400">
+        <i class="bi bi-instagram text-2xl"></i>
+      </a>
+      <a href="#" class="hover:text-primary-400">
+        <i class="bi bi-linkedin text-2xl"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+{% endblock content %} {% block script %}
+<script>
+  function typedEffect() {
+    return {
+      words: ["Muslim", "Software Engineer", "ML Enthusiast"],
+      current: "",
+      i: 0,
+      j: 0,
+      isDeleting: false,
+      start() {
+        const tick = () => {
+          const word = this.words[this.i];
+          if (this.isDeleting) {
+            this.current = word.substring(0, this.j--);
+          } else {
+            this.current = word.substring(0, this.j++);
+          }
+
+          if (!this.isDeleting && this.j === word.length + 1) {
+            this.isDeleting = true;
+            setTimeout(tick, 1500);
+          } else if (this.isDeleting && this.j === 0) {
+            this.isDeleting = false;
+            this.i = (this.i + 1) % this.words.length;
+            setTimeout(tick, 200);
+          } else {
+            setTimeout(tick, this.isDeleting ? 50 : 100);
+          }
+        };
+        tick();
+      },
+    };
+  }
+</script>
+{% endblock script %}

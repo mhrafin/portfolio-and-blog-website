@@ -18,10 +18,22 @@
     {% block body %}
     <header>
       {% block header %} {% endblock header %} {% block nav %}
+
       <nav
         class="fixed w-full top-0 left-0 z-50 backdrop-blur-lg border-b border-blue-200/20">
-        <div class="mx-auto p-4 text-white font-bold">Raf</div>
+        <div class="mx-auto flex items-center justify-between p-4">
+          <!-- Logo -->
+          <div class="text-white font-bold pl-6 md:pl-21">Raf</div>
+
+          <!-- Button -->
+           <a href="blog/index.html" class="pr-6 md:pr-21"><button
+            type="button"
+            class="text-gray-900 hover:text-white border border-gray-800  focus:ring-1 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:focus:ring-gray-800 ">
+            Blogs
+          </button></a>
+        </div>
       </nav>
+
       {% endblock nav %}
     </header>
     <main>{% block content %} {% endblock content %}</main>

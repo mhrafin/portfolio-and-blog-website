@@ -14,27 +14,54 @@
     }
   }
 </style>
-{% endblock style %} {% block content %}
+{% endblock style %} {% block nav %}
+
+<nav
+  class="fixed w-full top-0 left-0 z-50 backdrop-blur-lg bg-white/30 dark:bg-black/30 border-b border-blue-200/20">
+  <div class="mx-auto flex items-center justify-between p-4">
+    <!-- Logo -->
+    <div class="text-white font-bold pl-6 md:pl-21">Raf</div>
+
+    <!-- Button -->
+    <!-- <a href="blog/index.html" class="pr-6 md:pr-21"><button
+            type="button"
+            class="text-gray-900 hover:text-white border border-gray-800  focus:ring-1 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:focus:ring-gray-800 ">
+            Blogs
+          </button></a> -->
+    <a
+      href="{{ INDEX_SAVE_AS }}"
+      class="mr-6 md:mr-21 text-gray-900 hover:text-white focus:ring-1 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-gray-400 dark:hover:text-white dark:focus:ring-gray-800">
+      Blogs
+    </a>
+  </div>
+</nav>
+
+{% endblock nav %} {% block content %}
 <section
   id="hero"
   class="relative h-screen flex items-center justify-center bg-black">
   <!-- Background image -->
   <div
-    class="absolute inset-0 bg-cover bg-[20%_center] mask-radial-at-top-left mask-radial-to-90% mask-r-from-1% mask-l-from-90% mask-l-to-101% mask-b-from-90% mask-b-to-100%"
-    style="background-image: url('static/images/portfolio-bg.jpg')"></div>
+    class="absolute inset-0 bg-cover bg-[20%_20%] bg-[url(/static/images/portfolio-bg.jpg)]">
+    <div
+      class="absolute inset-0 pointer-events-none bg-night mask-radial-at-right mask-radial-to-100%"></div>
+    <div
+      class="absolute inset-0 pointer-events-none bg-night mask-radial-at-bottom-right mask-radial-from-30%"></div>
+    <div
+      class="absolute inset-0 pointer-events-none bg-night mask-r-to-25%"></div>
+    <div
+      class="absolute inset-0 pointer-events-none bg-night mask-t-to-25%"></div>
+  </div>
 
   <!-- Dark overlay -->
-  <div class="absolute inset-0 bg-black/10"></div>
+  <!-- <div class="z-2 mask-radial-at-bottom-right mask-radial-to-75%"></div> -->
 
   <!-- Content -->
   <div class="relative z-10 ml-auto text-right pr-6 md:pr-24">
-    <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4">
+    <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-4">
       Mahedi Hassan Rafin
     </h1>
-    <p
-      x-data="typedEffect()"
-      x-init="start()"
-      class="text-2xl text-gray-200">
+    <p x-data="typedEffect()" x-init="start()" class="text-2xl text-gray-200">
       I'm a
       <span x-text="current" class="underline decoration-primary-400"></span
       ><span class="animate-blink">|</span>

@@ -2,9 +2,10 @@
 <html lang="{% block html_lang %}{{ DEFAULT_LANG }}{% endblock html_lang %}">
   <head>
     {% block head %}
-    <!-- Tailwind -->
+    <!-- Tailwind and Flowbite-->
+     {% block tailwind_n_flowbite %}
     <link href="./static/css/output.css" rel="stylesheet" />
-
+    {% endblock tailwind_n_flowbite%}
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}{{ SITENAME|striptags }}{% endblock title %}</title>
@@ -14,25 +15,12 @@
     head_scripts %} {% block style %} {% endblock style %}
   </head>
 
-  <body>
+  <body class="text-platinum bg-night">
     {% block body %}
     <header>
       {% block header %} {% endblock header %} {% block nav %}
 
-      <nav
-        class="fixed w-full top-0 left-0 z-50 backdrop-blur-lg border-b border-blue-200/20">
-        <div class="mx-auto flex items-center justify-between p-4">
-          <!-- Logo -->
-          <div class="text-white font-bold pl-6 md:pl-21">Raf</div>
-
-          <!-- Button -->
-           <a href="blog/index.html" class="pr-6 md:pr-21"><button
-            type="button"
-            class="text-gray-900 hover:text-white border border-gray-800  focus:ring-1 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:focus:ring-gray-800 ">
-            Blogs
-          </button></a>
-        </div>
-      </nav>
+      
 
       {% endblock nav %}
     </header>

@@ -217,6 +217,7 @@ __marimo__/
 
 # content/
 output/
+pelican-themes/
 # Logs
 logs
 *.log

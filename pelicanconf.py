@@ -41,7 +41,8 @@ THEME_STATIC_DIR = 'static'
 
 THEME_STATIC_PATHS = ['static']
 
-INDEX_SAVE_AS = 'blog/index.html'
+INDEX_SAVE_AS = 'blogs.html'
+ARTICLE_SAVE_AS = 'blog/{slug}.html'
 
 TEMPLATE_PAGES = {
     'portfolio.html': 'index.html',  # your custom landing page

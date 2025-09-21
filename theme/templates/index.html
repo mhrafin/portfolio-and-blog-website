@@ -1,51 +1,8 @@
-{% extends "base.html" %} {% block nav %}
-<div class="text-center m-4">
-  <a href=""
-    ><h1 class="text-7xl underline decoration-persian-red">Raf's Blogs</h1></a
-  >
-  <nav
-    class="bg-eerie-black mt-16 mb-12 ml-6 md:ml-25 mr-6 md:mr-25 p-4 rounded-xl"></nav>
-</div>
-{% endblock nav %} {% block content %}
+{% extends "base.html" %} {% block content %}
 <section class="ml-6 md:ml-21 mr-6 md:mr-21">
-  <!-- {% block content_title %}
-  <h1 class="p-6 text-4xl">All articles</h1>
-  <hr class="p-3" />
-  {% endblock content_title %} 
   {% for article in articles_page.object_list %}
-  <article>
-    <header>
-      <h2>
-        <a
-          href="{{ SITEURL }}/blog/{{ article.url }}"
-          rel="bookmark"
-          title="Permalink to {{ article.title|striptags }}"
-          >{{ article.title }}</a
-        >
-      </h2>
-    </header>
-    <section>{{ article.summary }}</section>
-    <footer>
-      <p>
-        Published:
-        <time datetime="{{ article.date.isoformat() }}">
-          {{ article.locale_date }}
-        </time>
-      </p>
-      <address>
-        By {% for author in article.authors %}
-        <a href="{{ SITEURL }}/{{ author.url }}">{{ author }}</a>
-        {% endfor %}
-      </address>
-    </footer>
-  </article>
-  {% endfor %} -->
-  {% for article in articles_page.object_list %}
-  <!-- Outer rounded card -->
   <div class="rounded-lg p-8 m-8 bg-eerie-black">
-    <!-- layout: stacked on small screens, side-by-side on md+ -->
     <div class="flex flex-col md:flex-row gap-8 md:gap-12">
-      <!-- LEFT: image panel -->
       {% if article.coverimage %}
       <div class="md:flex-1">
         <!-- outer inset border for the image area -->
@@ -54,18 +11,19 @@
         <div
           class="w-full h-100 rounded-[18px] bg-white flex items-center justify-center overflow-hidden">
           <!-- replace with <img src="..." class="w-full h-full object-cover"> -->
-          <img class="w-full h-full object-cover object-center transform-gpu transition-transform duration-300 ease-out scale-[1.06] hover:scale-[1.00] origin-center motion-reduce:transition-none motion-reduce:transform-none" src="{{ article.coverimage }}" alt="" />
+          <img
+            class="w-full h-full object-cover object-center transform-gpu transition-transform duration-300 ease-out scale-[1.06] hover:scale-[1.00] origin-center motion-reduce:transition-none motion-reduce:transform-none"
+            src="{{ article.coverimage }}"
+            alt="" />
         </div>
       </div>
       {% else %} {% endif %}
-      <!-- RIGHT: content column -->
       <div class="md:flex-1 flex flex-col justify-between">
         <div>
           <h1 class="text-4xl md:text-5xl font-extrabold tracking-wide mb-6">
             {{ article.title }}
           </h1>
 
-          <!-- Summary label + lines -->
           <div class="space-y-3">
             <div class="flex items-center gap-4">
               <section class="font-medium">{{ article.summary }}</section>
@@ -73,13 +31,14 @@
           </div>
         </div>
 
-        <!-- Read More button anchored bottom-right inside the right column -->
         <div class="mt-6 flex justify-end">
-          <button
-            class="px-5 py-2 rounded-xl border-1 border-persian-red hover:border-sea-green text-lg font-medium shadow-sm hover:bg-sea-green transition"
-            type="button">
-            Read More
-          </button>
+          <a href="{{ SITEURL }}/blog/{{ article.url }}">
+            <button
+              class="px-5 py-2 rounded-xl border-1 border-persian-red hover:border-sea-green text-lg font-medium shadow-sm hover:bg-sea-green transition"
+              type="button">
+              Read More
+            </button>
+          </a>
         </div>
       </div>
     </div>

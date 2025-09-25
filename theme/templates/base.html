@@ -3,7 +3,7 @@
   <head>
     {% block head %}
     <!-- Tailwind and Flowbite-->
-     {% block tailwind_n_flowbite %}
+    {% block tailwind_n_flowbite %}
     <link href="./static/css/output.css" rel="stylesheet" />
     {% endblock tailwind_n_flowbite%}
     <meta charset="UTF-8" />
@@ -19,12 +19,37 @@
     {% block body %}
     <header>
       {% block header %} {% endblock header %} {% block nav %}
-
-      
-
+      <div class="text-center m-4">
+        <a href="{{ SITEURL }}/blogs"
+          ><h1 class="text-6xl underline font-extrabold decoration-persian-red">
+            Raf's Blogs
+          </h1></a
+        >
+        <nav
+          class="bg-eerie-black mt-16 mb-12 ml-1 md:ml-25 mr-1 md:mr-25 p-4 rounded-xl">
+          <div class="inline-flex rounded-md shadow-xs">
+            <a
+              href="{{ SITEURL }}/"
+              class="px-4 py-2 text-sm font-medium bg-night/50 border border-persian-red/50 rounded-s-lg hover:bg-night focus:z-10 focus:ring-1 focus:ring-persian-red">
+              Raf
+            </a>
+            <!-- class="px-4 py-2 text-sm font-medium bg-night/50 border-t border-b border-persian-red/50 hover:bg-night focus:z-10 focus:ring-1 focus:ring-persian-red" -->
+            <a
+              href="{{ SITEURL }}/blogs"
+              class="px-4 py-2 text-sm font-medium bg-night/50 border border-persian-red/50 rounded-e-lg hover:bg-night focus:z-10 focus:ring-1 focus:ring-persian-red">
+              Blogs
+            </a>
+            <!-- <a
+              href="#"
+              class="px-4 py-2 text-sm font-medium bg-night/50 border border-persian-red/50 rounded-e-lg hover:bg-night focus:z-10 focus:ring-1 focus:ring-persian-red">
+              Messages
+            </a> -->
+          </div>
+        </nav>
+      </div>
       {% endblock nav %}
     </header>
-    <main>{% block content %} {% endblock content %}</main>
+    <main class="text-justify">{% block content %} {% endblock content %}</main>
     {% endblock body %} {% block script %} {% endblock script %}
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
   </body>

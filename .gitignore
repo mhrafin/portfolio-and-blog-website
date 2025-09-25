@@ -218,6 +218,7 @@ __marimo__/
 # content/
 output/
 pelican-themes/
+content/
 # Logs
 logs
 *.log

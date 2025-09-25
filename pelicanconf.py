@@ -1,3 +1,17 @@
+
+import sys
+sys.path.append('./tools')
+
+from wrap_images import wrap_images
+from no_img import no_img
+
+
+
+
+
+JINJA_FILTERS ={"wrap_images": wrap_images,
+                "no_img": no_img} 
+
 AUTHOR = 'Mahedi Hassan Rafin'
 SITENAME = 'Raf'
 SITEURL = ""
@@ -34,6 +48,13 @@ DEFAULT_PAGINATION = 10
 # Uncomment following line if you want document-relative URLs when developing
 # RELATIVE_URLS = True
 
+# PAGE_EXCLUDES = ["content/templates"]
+
+PATH = "content/content"
+
+ARTICLE_PATHS = [""]
+
+# ARTICLE_EXCLUDES = ["content/templates"]
 
 THEME = "theme"
 

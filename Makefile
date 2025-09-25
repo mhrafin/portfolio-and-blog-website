@@ -8,6 +8,10 @@ OUTPUTDIR=$(BASEDIR)/output
 CONFFILE=$(BASEDIR)/pelicanconf.py
 PUBLISHCONF=$(BASEDIR)/publishconf.py
 
+S3BUCKET=me.rafdev.xyz
+OBSIDIANBUCKET=my-obisdian-vaults
+AWSPROFILE=iam-pelican-deployer
+
 
 DEBUG ?= 0
 ifeq ($(DEBUG), 1)
@@ -67,6 +71,12 @@ devserver-global:
 
 publish:
 	"$(PELICAN)" "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(PUBLISHCONF)" $(PELICANOPTS)
+
+
+
+sync-to-aws:	
+	aws s3 sync output/ s3://$(S3BUCKET)/ --delete --profile $(AWSPROFILE)
+	aws s3 sync content/ s3://$(OBSIDIANBUCKET)/content/ --delete --profile $(AWSPROFILE)
 
 
 .PHONY: html help clean regenerate serve serve-global devserver devserver-global publish 

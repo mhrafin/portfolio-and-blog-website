@@ -1,3 +1,65 @@
-{% extends "base.html" %} {% block tailwind_n_flowbite %}
+{% extends "base.html" %} {% block head %} {{ super() }} {% block
+tailwind_n_flowbite %}
 <link href="../static/css/output.css" rel="stylesheet" />
-{% endblock tailwind_n_flowbite%}
+{% endblock tailwind_n_flowbite%} {% if article.description %}
+<meta name="description" content="{{article.description}}" />
+{% endif %} {% for tag in article.tags %}
+<meta name="tags" content="{{tag}}" />
+{% endfor %}{% endblock head %} {% block content %}
+<section class="ml-5 md:ml-29 mr-5 md:mr-29">
+  <div class="rounded-lg bg-eerie-black p-6">
+    <div>
+      <h1
+        class="text-6xl md:text-7xl font-extrabold tracking-wide mb-6 underline decoration-sea-green">
+        {{ article.title }}
+      </h1>
+      <p class="text-xs italic m-2">
+        Published:
+        <time datetime="{{ article.date.isoformat() }}">
+          {{ article.locale_date }}
+        </time>
+      </p>
+      {% if article.coverimage %}
+      <img
+        class="w-full h-full max-h-150 aspect-auto object-cover rounded-[18px]"
+        src="{{ article.coverimage }}"
+        alt="{{ article.title }}" />
+        {% else %} {% endif %}
+    </div>
+    <div class="md:m-20 mt-20">
+      <div class="p-[2px] mb-6 rounded-xl bg-sea-green"></div>
+      {{ article.content | wrap_images | safe }}
+      <!-- <footer>
+        <p></p>
+        {% if article.modified %}
+        <p>
+          Last updated:
+          <time datetime="{{ article.modified.isoformat() }}">
+            {{ article.locale_modified }}
+          </time>
+        </p>
+        {% endif %} {% if article.authors %}
+        <address>
+          By {% for author in article.authors %}
+          <a href="{{ SITEURL }}/{{ author.url }}">{{ author }}</a>
+          {% endfor %}
+        </address>
+        {% endif %} {% if article.category %}
+        <p>
+          Category:
+          <a href="{{ SITEURL }}/{{ article.category.url }}"
+            >{{ article.category }}</a
+          >
+        </p>
+        {% endif %} {% if article.tags %}
+        <p>
+          Tags: {% for tag in article.tags %}
+          <a href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a>
+          {% endfor %}
+        </p>
+        {% endif %}
+      </footer> -->
+    </div>
+  </div>
+</section>
+{% endblock content %}

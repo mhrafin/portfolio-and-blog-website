@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "its_me_raf.md",
+                "file": "content/blog/test1.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "its_me_raf"
+              "title": "test1"
             }
           }
         ]
@@ -187,7 +187,24 @@
   },
   "active": "896e12ccdd3ff600",
   "lastOpenFiles": [
-    "test.md",
+    "templates/blog.md",
+    "content/test.md",
+    "templates/Untitled.txt.md",
+    "templates/Untitled.txt",
+    "content",
+    "Untitled.md",
+    "templates",
+    "content/blog/test1.md",
+    "content/blog/its_me_raf.md",
+    "templates/blog template.md",
+    "templates",
+    "content/images/me.jpg",
+    "content/images/its_me_raf-1758447911794.jpeg",
+    "images/Pasted image 20250921152215.png",
+    "images/its_me_raf-1758447506019.jpeg",
+    "images/its_me_raf-1758447406009.webp",
+    "content/blog",
+    "Pasted image 20250921152036.png",
     "Welcome.md"
   ]
 }

@@ -1,3 +1,5 @@
+-include .env
+
 PY?=
 PELICAN?=pelican
 PELICANOPTS=
@@ -8,9 +10,9 @@ OUTPUTDIR=$(BASEDIR)/output
 CONFFILE=$(BASEDIR)/pelicanconf.py
 PUBLISHCONF=$(BASEDIR)/publishconf.py
 
-S3BUCKET=me.rafdev.xyz
-OBSIDIANBUCKET=my-obisdian-vaults
-AWSPROFILE=iam-pelican-deployer
+S3BUCKET ?= your.s3.bucket
+OBSIDIANBUCKET ?= your.obsidian.bucket
+AWSPROFILE ?= your.configured.aws.profile
 
 
 DEBUG ?= 0

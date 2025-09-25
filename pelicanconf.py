@@ -51,8 +51,9 @@ DEFAULT_PAGINATION = 10
 # PAGE_EXCLUDES = ["content/templates"]
 
 PATH = "content/content"
+# STATIC_PATHS = ["content/images"]
 
-ARTICLE_PATHS = [""]
+# ARTICLE_PATHS = [""]
 
 # ARTICLE_EXCLUDES = ["content/templates"]
 

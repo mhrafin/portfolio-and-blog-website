@@ -80,5 +80,8 @@ sync-to-aws:
 	aws s3 sync output/ s3://$(S3BUCKET)/ --delete --profile $(AWSPROFILE)
 	aws s3 sync content/ s3://$(OBSIDIANBUCKET)/content/ --delete --profile $(AWSPROFILE)
 
+sync-content-from-aws:
+	aws s3 sync s3://$(OBSIDIANBUCKET)/content/ content/ --profile $(AWSPROFILE) 
+
 
 .PHONY: html help clean regenerate serve serve-global devserver devserver-global publish 

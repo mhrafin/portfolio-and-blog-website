@@ -8,17 +8,16 @@
         <!-- outer inset border for the image area -->
 
         <!-- inner rounded panel (like the inner rounded corner in the sketch) -->
-        
-          <img
-            class="w-full max-h-100 aspect-auto object-cover object-center transform-gpu transition-transform duration-300 ease-out scale-[1.06] hover:scale-[1.00] origin-center motion-reduce:transition-none motion-reduce:transform-none"
-            src="{{ article.coverimage }}"
-            alt="" />
-        
+
+        <img
+          class="w-full max-h-100 aspect-auto object-cover object-center transform-gpu transition-transform duration-300 ease-out scale-[1.06] hover:scale-[1.00] origin-center motion-reduce:transition-none motion-reduce:transform-none"
+          src="{{ article.coverimage }}" alt="" />
+
       </div>
       {% else %} {% endif %}
       <div class="md:flex-1 flex flex-col justify-between">
         <div>
-          <h1 class="text-4xl md:text-5xl font-extrabold tracking-wide mb-6">
+          <h1 class="text-3xl md:text-4xl font-extrabold tracking-wide mb-6 text-left">
             {{ article.title }}
           </h1>
 
@@ -30,12 +29,11 @@
         </div>
 
         <div class="mt-6 flex justify-end">
-          <a href="{{ SITEURL }}/blog/{{ article.url }}">
-            <button
-              class="px-5 py-2 rounded-xl border-1 border-persian-red hover:border-sea-green text-lg font-medium shadow-sm hover:bg-sea-green transition"
-              type="button">
-              Read More
-            </button>
+          <a href="{{ SITEURL }}/blog/{{ article.url }}"
+            class="px-5 py-2 rounded-xl border-1 border-persian-red hover:border-sea-green text-lg font-medium shadow-sm hover:bg-sea-green transition">
+
+            Read More
+
           </a>
         </div>
       </div>

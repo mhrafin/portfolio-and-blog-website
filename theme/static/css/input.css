@@ -1,5 +1,7 @@
 @import "tailwindcss";
 @import "flowbite/src/themes/default";
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wdth,wght@0,75..100,100..700;1,75..100,100..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 @plugin "flowbite/plugin";
 
 @source "../../templates/*.html";
@@ -12,3 +14,24 @@
     --color-persian-red: #BB4430;
     --color-sea-green: #5B8C5A;
 }
+
+body {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400; /* regular */
+  font-size: 1rem; /* adjust to taste */
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 600; /* or 700 for extra punch */
+  letter-spacing: -0.02em;
+  margin: 1.2em 0 0.6em;
+}
+
+/* label, button {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500; 
+  font-size: 0.875rem; 
+  text-transform: uppercase; 
+} */

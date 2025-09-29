@@ -1,7 +1,5 @@
 {% extends "base.html" %} {% block head_scripts %}
-<script
-  defer
-  src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 {% endblock head_scripts %} {% block style %}
 <style>
   .animate-blink {
@@ -16,8 +14,7 @@
 </style>
 {% endblock style %} {% block nav %}
 
-<nav
-  class="fixed w-full top-0 left-0 z-50 backdrop-blur-lg bg-white/30 dark:bg-black/30 border-b border-blue-200/20">
+<nav class="fixed w-full top-0 left-0 z-50 backdrop-blur-lg bg-white/30 dark:bg-black/30 border-b border-blue-200/20">
   <div class="mx-auto flex items-center justify-between p-4">
     <!-- Logo -->
     <div class="text-white font-bold pl-6 md:pl-21">Raf</div>
@@ -28,8 +25,7 @@
             class="text-gray-900 hover:text-white border border-gray-800  focus:ring-1 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:focus:ring-gray-800 ">
             Blogs
           </button></a> -->
-    <a
-      href="{{ INDEX_SAVE_AS }}"
+    <a href="{{ INDEX_SAVE_AS }}"
       class="mr-6 md:mr-21 text-gray-900 hover:text-white focus:ring-1 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-gray-400 dark:hover:text-white dark:focus:ring-gray-800">
       Blogs
     </a>
@@ -37,20 +33,13 @@
 </nav>
 
 {% endblock nav %} {% block content %}
-<section
-  id="hero"
-  class="relative h-screen flex items-center justify-center bg-black">
+<section id="hero" class="relative h-screen flex items-center justify-center bg-black pb-12">
   <!-- Background image -->
-  <div
-    class="absolute inset-0 bg-cover bg-[20%_20%] bg-[url(/static/images/portfolio-bg.jpg)]">
-    <div
-      class="absolute inset-0 pointer-events-none bg-night mask-radial-at-right mask-radial-to-100%"></div>
-    <div
-      class="absolute inset-0 pointer-events-none bg-night mask-radial-at-bottom-right mask-radial-from-30%"></div>
-    <div
-      class="absolute inset-0 pointer-events-none bg-night mask-r-to-25%"></div>
-    <div
-      class="absolute inset-0 pointer-events-none bg-night mask-t-to-25%"></div>
+  <div class="absolute inset-0 bg-cover bg-[20%_20%] bg-[url(/static/images/portfolio-bg.jpg)]">
+    <div class="absolute inset-0 pointer-events-none bg-night mask-radial-at-right mask-radial-to-100%"></div>
+    <div class="absolute inset-0 pointer-events-none bg-night mask-radial-at-bottom-right mask-radial-from-30%"></div>
+    <div class="absolute inset-0 pointer-events-none bg-night mask-r-to-25%"></div>
+    <div class="absolute inset-0 pointer-events-none bg-night mask-t-to-25%"></div>
   </div>
 
   <!-- Dark overlay -->
@@ -58,34 +47,33 @@
 
   <!-- Content -->
   <div class="relative z-10 ml-auto text-right pr-6 md:pr-24">
-    <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-4">
+    <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-4">
       Mahedi Hassan Rafin
     </h1>
     <p x-data="typedEffect()" x-init="start()" class="text-2xl text-gray-200">
       I'm a
-      <span x-text="current" class="underline decoration-primary-400"></span
-      ><span class="animate-blink">|</span>
+      <span x-text="current" class="text-persian-red decoration-primary-400"></span><span
+        class="animate-blink text-persian-red">|</span>
     </p>
 
     <!-- Social Links -->
     <div class="flex justify-end mt-6 text-white">
-      <a href="https://github.com/mhrafin" class="hover:text-primary-400">
-        <svg
-          class="w-[24px] h-[24px] md:w-[34px] md:h-[34px] lg:w-[44px] lg:h-[44px] text-gray-800 dark:text-white"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          fill="currentColor"
-          viewBox="0 0 24 24">
-          <path
-            fill-rule="evenodd"
+      <a href="https://github.com/mhrafin" class="mx-1">
+        <svg class="w-[21px] h-[21px] md:w-[28px] md:h-[28px] lg:w-[33px] lg:h-[33px]" aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+          <path fill-rule="evenodd"
             d="M12.006 2a9.847 9.847 0 0 0-6.484 2.44 10.32 10.32 0 0 0-3.393 6.17 10.48 10.48 0 0 0 1.317 6.955 10.045 10.045 0 0 0 5.4 4.418c.504.095.683-.223.683-.494 0-.245-.01-1.052-.014-1.908-2.78.62-3.366-1.21-3.366-1.21a2.711 2.711 0 0 0-1.11-1.5c-.907-.637.07-.621.07-.621.317.044.62.163.885.346.266.183.487.426.647.71.135.253.318.476.538.655a2.079 2.079 0 0 0 2.37.196c.045-.52.27-1.006.635-1.37-2.219-.259-4.554-1.138-4.554-5.07a4.022 4.022 0 0 1 1.031-2.75 3.77 3.77 0 0 1 .096-2.713s.839-.275 2.749 1.05a9.26 9.26 0 0 1 5.004 0c1.906-1.325 2.74-1.05 2.74-1.05.37.858.406 1.828.101 2.713a4.017 4.017 0 0 1 1.029 2.75c0 3.939-2.339 4.805-4.564 5.058a2.471 2.471 0 0 1 .679 1.897c0 1.372-.012 2.477-.012 2.814 0 .272.18.592.687.492a10.05 10.05 0 0 0 5.388-4.421 10.473 10.473 0 0 0 1.313-6.948 10.32 10.32 0 0 0-3.39-6.165A9.847 9.847 0 0 0 12.007 2Z"
             clip-rule="evenodd" />
         </svg>
       </a>
-      <a href="#" class="hover:text-primary-400">
-        <i class="bi bi-facebook text-2xl"></i>
+      <a href="https://linkedin.com/in/mhrafin" class="mx-1">
+        <svg class="w-[21px] h-[21px] md:w-[28px] md:h-[28px] lg:w-[33px] lg:h-[33px]" aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+          <path fill-rule="evenodd"
+            d="M12.51 8.796v1.697a3.738 3.738 0 0 1 3.288-1.684c3.455 0 4.202 2.16 4.202 4.97V19.5h-3.2v-5.072c0-1.21-.244-2.766-2.128-2.766-1.827 0-2.139 1.317-2.139 2.676V19.5h-3.19V8.796h3.168ZM7.2 6.106a1.61 1.61 0 0 1-.988 1.483 1.595 1.595 0 0 1-1.743-.348A1.607 1.607 0 0 1 5.6 4.5a1.601 1.601 0 0 1 1.6 1.606Z"
+            clip-rule="evenodd" />
+          <path d="M7.2 8.809H4V19.5h3.2V8.809Z" />
+        </svg>
       </a>
       <a href="#" class="hover:text-primary-400">
         <i class="bi bi-instagram text-2xl"></i>
@@ -95,6 +83,14 @@
       </a>
     </div>
   </div>
+</section>
+<section class="max-w-6xl mx-auto px-6 py-12 pt-24 text-persian-red">
+  <h2 class="text-5xl font-extrabold text-center">
+    Who Am I?
+  </h2>
+  <p>
+
+  </p>
 </section>
 <section id="recent-posts" class="max-w-6xl mx-auto px-6 py-12">
   <h2 class="text-2xl font-semibold mb-6">Recent posts</h2>
@@ -114,8 +110,7 @@
         {# Some generators provide article.summary or article.metadata.summary
         #} {{ article.summary | no_img | safe }}
       </p>
-      <a
-        href="/blog/{{ article.url }}"
+      <a href="/blog/{{ article.url }}"
         class="inline-block text-sm font-medium hover:underline hover:decoration-persian-red">
         Read →
       </a>

@@ -81,7 +81,10 @@ sync-to-aws:
 	aws s3 sync content/ s3://$(OBSIDIANBUCKET)/content/ --delete --profile $(AWSPROFILE)
 
 sync-content-from-aws:
-	aws s3 sync s3://$(OBSIDIANBUCKET)/content/ content/ --profile $(AWSPROFILE) 
+	aws s3 sync s3://$(OBSIDIANBUCKET)/content/ content/ --profile $(AWSPROFILE)
+
+tailwind-css:
+	npx @tailwindcss/cli -i theme/static/css/input.css -o theme/static/css/output.css --compat --watch
 
 
 .PHONY: html help clean regenerate serve serve-global devserver devserver-global publish 

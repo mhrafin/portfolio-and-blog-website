@@ -13,6 +13,13 @@
     --color-eerie-black: #1F1F1F;
     --color-persian-red: #BB4430;
     --color-sea-green: #5B8C5A;
+    --color-surface: #16130b;
+    --color-on-surface: #e9e2d4;
+    --color-primary: #dfc56d;
+    --color-on-tertiary: #173721;
+    --color-on-primary: #3b2f00;
+    --color-on-surface-var: #cec6b4;
+    --color-surf-container-lowest: #100e07;
 }
 
 body {

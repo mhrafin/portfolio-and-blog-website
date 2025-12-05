@@ -42,7 +42,6 @@ help:
 	@echo '   make html                           (re)generate the web site          '
 	@echo '   make clean                          remove the generated files         '
 	@echo '   make regenerate                     regenerate files upon modification '
-	@echo '   make publish                        generate using production settings '
 	@echo '   make serve [PORT=8000]              serve site at http://localhost:8000'
 	@echo '   make serve-global [SERVER=0.0.0.0]  serve (as root) to $(SERVER):80    '
 	@echo '   make devserver [PORT=8000]          serve and regenerate together      '
@@ -50,6 +49,8 @@ help:
 	@echo '   make build-css                      build tailwind css                 '
 	@echo '   make watch-css                      watch tailwind css for changes     '
 	@echo '   make sync-to-aws                    sync output and content to S3      '
+	@echo '   make sync-output                    sync output to S3                  '
+	@echo '   make sync-content                   sync content to S3                 '
 	@echo '   make sync-content-from-aws          sync content from S3               '
 	@echo '                                                                          '
 	@echo 'Set the DEBUG variable to 1 to enable debugging, e.g. make DEBUG=1 html   '
@@ -84,11 +85,15 @@ build-css:
 watch-css:
 	npx @tailwindcss/cli -i $(TAILWIND_INPUT) -o $(TAILWIND_OUTPUT) --compat --watch
 
-sync-to-aws:	
+sync-output:
 	aws s3 sync output/ s3://$(S3BUCKET)/ --delete --profile $(AWSPROFILE)
+
+sync-content:
 	aws s3 sync content/ s3://$(OBSIDIANBUCKET)/content/ --delete --profile $(AWSPROFILE)
+
+sync-to-aws: sync-output sync-content
 
 sync-content-from-aws:
 	aws s3 sync s3://$(OBSIDIANBUCKET)/content/ content/ --profile $(AWSPROFILE)
 
-.PHONY: html help clean regenerate serve serve-global devserver devserver-global publish build-css watch-css sync-to-aws sync-content-from-aws
+.PHONY: html help clean regenerate serve serve-global devserver devserver-global build-css watch-css sync-to-aws sync-output sync-content sync-content-from-aws

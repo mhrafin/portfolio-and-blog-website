@@ -48,14 +48,14 @@ DEFAULT_PAGINATION = 10
 # Uncomment following line if you want document-relative URLs when developing
 # RELATIVE_URLS = True
 
-# PAGE_EXCLUDES = ["content/templates"]
+PAGE_EXCLUDES = ["templates", ".obsidian"]
 
 PATH = "content/content"
 # STATIC_PATHS = ["content/images"]
 
 # ARTICLE_PATHS = [""]
 
-# ARTICLE_EXCLUDES = ["content/templates"]
+ARTICLE_EXCLUDES = ["templates", ".obsidian"]
 
 THEME = "theme"
 

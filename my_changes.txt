@@ -1,0 +1,304 @@
+diff --git a/Makefile b/Makefile
+index 8dd999f..0f4a14f 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1,7 +1,7 @@
+-include .env
+
+PY?=
+[-PELICAN?=pelican-]{+PELICAN?=pipenv run pelican+}
+PELICANOPTS=
+
+BASEDIR=$(CURDIR)
+@@ -10,6 +10,9 @@ OUTPUTDIR=$(BASEDIR)/output
+CONFFILE=$(BASEDIR)/pelicanconf.py
+PUBLISHCONF=$(BASEDIR)/publishconf.py
+
+{+TAILWIND_INPUT=theme/static/css/input.css+}
+{+TAILWIND_OUTPUT=theme/static/css/output.css+}
+
+S3BUCKET ?= your.s3.bucket
+OBSIDIANBUCKET ?= your.obsidian.bucket
+AWSPROFILE ?= your.configured.aws.profile
+@@ -45,36 +48,44 @@ help:
+	@echo '   make serve-global [SERVER=0.0.0.0]  serve (as root) to $(SERVER):80    '
+	@echo '   make devserver [PORT=8000]          serve and regenerate together      '
+	@echo '   make devserver-global               regenerate and serve on 0.0.0.0    '
+	{+@echo '   make build-css                      build tailwind css                 '+}
+{+	@echo '   make watch-css                      watch tailwind css for changes     '+}
+{+	@echo '   make sync-to-aws                    sync output and content to S3      '+}
+{+	@echo '   make sync-content-from-aws          sync content from S3               '+}
+	@echo '                                                                          '
+	@echo 'Set the DEBUG variable to 1 to enable debugging, e.g. make DEBUG=1 html   '
+	@echo 'Set the RELATIVE variable to 1 to enable relative urls                    '
+	@echo '                                                                          '
+
+html: [-"$(PELICAN)"-]{+build-css+}
+{+	$(PELICAN)+} "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(CONFFILE)" $(PELICANOPTS)
+
+clean:
+	[ ! -d "$(OUTPUTDIR)" ] || rm -rf "$(OUTPUTDIR)"
+
+regenerate:
+	[-"$(PELICAN)"-]{+$(PELICAN)+} -r "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(CONFFILE)" $(PELICANOPTS)
+
+serve:
+	[-"$(PELICAN)"-]{+$(PELICAN)+} -l "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(CONFFILE)" $(PELICANOPTS)
+
+serve-global:
+	[-"$(PELICAN)"-]{+$(PELICAN)+} -l "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(CONFFILE)" $(PELICANOPTS) -b $(SERVER)
+
+devserver:
+	[-"$(PELICAN)"-]{+$(PELICAN)+} -lr "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(CONFFILE)" $(PELICANOPTS)
+
+devserver-global:
+	[-"$(PELICAN)"-]{+$(PELICAN)+} -lr "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(CONFFILE)" $(PELICANOPTS) -b 0.0.0.0
+
+publish: [-"$(PELICAN)"-]{+build-css+}
+{+	$(PELICAN)+} "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(PUBLISHCONF)" $(PELICANOPTS)
+
+{+build-css:+}
+{+	npx @tailwindcss/cli -i $(TAILWIND_INPUT) -o $(TAILWIND_OUTPUT) --compat+}
+
+{+watch-css:+}
+{+	npx @tailwindcss/cli -i $(TAILWIND_INPUT) -o $(TAILWIND_OUTPUT) --compat --watch+}
+
+sync-to-aws:	
+	aws s3 sync output/ s3://$(S3BUCKET)/ --delete --profile $(AWSPROFILE)
+@@ -83,8 +94,4 @@ sync-to-aws:
+sync-content-from-aws:
+	aws s3 sync s3://$(OBSIDIANBUCKET)/content/ content/ --profile $(AWSPROFILE)
+
+[-tailwind-css:-]
+[-	npx @tailwindcss/cli -i theme/static/css/input.css -o theme/static/css/output.css --compat --watch-].PHONY: html help clean regenerate serve serve-global devserver devserver-global publish {+build-css watch-css sync-to-aws sync-content-from-aws+}
+diff --git a/pelicanconf.py b/pelicanconf.py
+index 76d8cd3..148445e 100644
+--- a/pelicanconf.py
++++ b/pelicanconf.py
+@@ -48,14 +48,14 @@ DEFAULT_PAGINATION = 10
+# Uncomment following line if you want document-relative URLs when developing
+# RELATIVE_URLS = True
+
+[-#-]PAGE_EXCLUDES = [-["content/templates"]-]{+["templates", ".obsidian"]+}
+
+PATH = "content/content"
+# STATIC_PATHS = ["content/images"]
+
+# ARTICLE_PATHS = [""]
+
+[-#-]ARTICLE_EXCLUDES = [-["content/templates"]-]{+["templates", ".obsidian"]+}
+
+THEME = "theme"
+
+diff --git a/theme/static/css/output.css b/theme/static/css/output.css
+index 15b5e45..c69fd41 100644
+--- a/theme/static/css/output.css
++++ b/theme/static/css/output.css
+@@ -1606,9 +1606,6 @@
+      text-align: center;
+    }
+  }
+[-  .w-1 {-]
+[-    width: calc(var(--spacing) * 1);-]
+[-  }-]
+  .w-1\/2 {
+    width: calc(1/2 * 100%);
+  }
+@@ -1707,9 +1704,6 @@
+  .flex-shrink {
+    flex-shrink: 1;
+  }
+[-  .border-collapse {-]
+[-    border-collapse: collapse;-]
+[-  }-]
+  .origin-center {
+    transform-origin: center;
+  }
+@@ -2032,15 +2026,6 @@
+      color: white;
+    }
+  }
+[-  .border-blue-200 {-]
+[-    border-color: var(--color-blue-200);-]
+[-  }-]
+[-  .border-blue-200\/20 {-]
+[-    border-color: color-mix(in srgb, #BFDBFE 20%, transparent);-]
+[-    @supports (color: color-mix(in lab, red, red)) {-]
+[-      border-color: color-mix(in oklab, var(--color-blue-200) 20%, transparent);-]
+[-    }-]
+[-  }-]
+  .border-blue-600 {
+    border-color: var(--color-blue-600);
+  }
+@@ -2119,9 +2104,6 @@
+  .bg-gray-200 {
+    background-color: var(--color-gray-200);
+  }
+[-  .bg-gray-900 {-]
+[-    background-color: var(--color-gray-900);-]
+[-  }-]
+  .bg-gray-900\/50 {
+    background-color: color-mix(in srgb, #111827 50%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+@@ -2134,9 +2116,6 @@
+  .bg-sea-green {
+    background-color: var(--color-sea-green);
+  }
+[-  .bg-surf-container-lowest {-]
+[-    background-color: var(--color-surf-container-lowest);-]
+[-  }-]
+  .bg-surf-container-lowest\/30 {
+    background-color: color-mix(in srgb, #100e07 30%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+@@ -2164,12 +2143,6 @@
+      background-color: color-mix(in oklab, var(--color-white) 5%, transparent);
+    }
+  }
+[-  .bg-white\/30 {-]
+[-    background-color: color-mix(in srgb, #ffffff 30%, transparent);-]
+[-    @supports (color: color-mix(in lab, red, red)) {-]
+[-      background-color: color-mix(in oklab, var(--color-white) 30%, transparent);-]
+[-    }-]
+[-  }-]
+  .bg-white\/50 {
+    background-color: color-mix(in srgb, #ffffff 50%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+@@ -2184,13 +2157,6 @@
+  .bg-\[url\(\/static\/images\/portfolio-bg\.jpg\)\] {
+    background-image: url(/static/images/portfolio-bg.jpg);
+  }
+[-  .mask-t-to-25 {-]
+[-    mask-image: var(--tw-mask-linear), var(--tw-mask-radial), var(--tw-mask-conic);-]
+[-    mask-composite: intersect;-]
+[-    --tw-mask-linear: var(--tw-mask-left), var(--tw-mask-right), var(--tw-mask-bottom), var(--tw-mask-top);-]
+[-    --tw-mask-top: linear-gradient(to top, var(--tw-mask-top-from-color) var(--tw-mask-top-from-position), var(--tw-mask-top-to-color) var(--tw-mask-top-to-position));-]
+[-    --tw-mask-top-to-position: calc(var(--spacing) * 25);-]
+[-  }-]
+  .mask-t-to-25\% {
+    mask-image: var(--tw-mask-linear), var(--tw-mask-radial), var(--tw-mask-conic);
+    mask-composite: intersect;
+@@ -2198,13 +2164,6 @@
+    --tw-mask-top: linear-gradient(to top, var(--tw-mask-top-from-color) var(--tw-mask-top-from-position), var(--tw-mask-top-to-color) var(--tw-mask-top-to-position));
+    --tw-mask-top-to-position: 25%;
+  }
+[-  .mask-r-from-1 {-]
+[-    mask-image: var(--tw-mask-linear), var(--tw-mask-radial), var(--tw-mask-conic);-]
+[-    mask-composite: intersect;-]
+[-    --tw-mask-linear: var(--tw-mask-left), var(--tw-mask-right), var(--tw-mask-bottom), var(--tw-mask-top);-]
+[-    --tw-mask-right: linear-gradient(to right, var(--tw-mask-right-from-color) var(--tw-mask-right-from-position), var(--tw-mask-right-to-color) var(--tw-mask-right-to-position));-]
+[-    --tw-mask-right-from-position: calc(var(--spacing) * 1);-]
+[-  }-]
+  .mask-r-from-1\% {
+    mask-image: var(--tw-mask-linear), var(--tw-mask-radial), var(--tw-mask-conic);
+    mask-composite: intersect;
+@@ -2212,13 +2171,6 @@
+    --tw-mask-right: linear-gradient(to right, var(--tw-mask-right-from-color) var(--tw-mask-right-from-position), var(--tw-mask-right-to-color) var(--tw-mask-right-to-position));
+    --tw-mask-right-from-position: 1%;
+  }
+[-  .mask-r-to-25 {-]
+[-    mask-image: var(--tw-mask-linear), var(--tw-mask-radial), var(--tw-mask-conic);-]
+[-    mask-composite: intersect;-]
+[-    --tw-mask-linear: var(--tw-mask-left), var(--tw-mask-right), var(--tw-mask-bottom), var(--tw-mask-top);-]
+[-    --tw-mask-right: linear-gradient(to right, var(--tw-mask-right-from-color) var(--tw-mask-right-from-position), var(--tw-mask-right-to-color) var(--tw-mask-right-to-position));-]
+[-    --tw-mask-right-to-position: calc(var(--spacing) * 25);-]
+[-  }-]
+  .mask-r-to-25\% {
+    mask-image: var(--tw-mask-linear), var(--tw-mask-radial), var(--tw-mask-conic);
+    mask-composite: intersect;
+@@ -2226,13 +2178,6 @@
+    --tw-mask-right: linear-gradient(to right, var(--tw-mask-right-from-color) var(--tw-mask-right-from-position), var(--tw-mask-right-to-color) var(--tw-mask-right-to-position));
+    --tw-mask-right-to-position: 25%;
+  }
+[-  .mask-radial-from-30 {-]
+[-    mask-image: var(--tw-mask-linear), var(--tw-mask-radial), var(--tw-mask-conic);-]
+[-    mask-composite: intersect;-]
+[-    --tw-mask-radial-stops: var(--tw-mask-radial-shape) var(--tw-mask-radial-size) at var(--tw-mask-radial-position), var(--tw-mask-radial-from-color) var(--tw-mask-radial-from-position), var(--tw-mask-radial-to-color) var(--tw-mask-radial-to-position);-]
+[-    --tw-mask-radial: radial-gradient(var(--tw-mask-radial-stops));-]
+[-    --tw-mask-radial-from-position: calc(var(--spacing) * 30);-]
+[-  }-]
+  .mask-radial-from-30\% {
+    mask-image: var(--tw-mask-linear), var(--tw-mask-radial), var(--tw-mask-conic);
+    mask-composite: intersect;
+@@ -2240,13 +2185,6 @@
+    --tw-mask-radial: radial-gradient(var(--tw-mask-radial-stops));
+    --tw-mask-radial-from-position: 30%;
+  }
+[-  .mask-radial-to-75 {-]
+[-    mask-image: var(--tw-mask-linear), var(--tw-mask-radial), var(--tw-mask-conic);-]
+[-    mask-composite: intersect;-]
+[-    --tw-mask-radial-stops: var(--tw-mask-radial-shape) var(--tw-mask-radial-size) at var(--tw-mask-radial-position), var(--tw-mask-radial-from-color) var(--tw-mask-radial-from-position), var(--tw-mask-radial-to-color) var(--tw-mask-radial-to-position);-]
+[-    --tw-mask-radial: radial-gradient(var(--tw-mask-radial-stops));-]
+[-    --tw-mask-radial-to-position: calc(var(--spacing) * 75);-]
+[-  }-]
+  .mask-radial-to-75\% {
+    mask-image: var(--tw-mask-linear), var(--tw-mask-radial), var(--tw-mask-conic);
+    mask-composite: intersect;
+@@ -2254,13 +2192,6 @@
+    --tw-mask-radial: radial-gradient(var(--tw-mask-radial-stops));
+    --tw-mask-radial-to-position: 75%;
+  }
+[-  .mask-radial-to-100 {-]
+[-    mask-image: var(--tw-mask-linear), var(--tw-mask-radial), var(--tw-mask-conic);-]
+[-    mask-composite: intersect;-]
+[-    --tw-mask-radial-stops: var(--tw-mask-radial-shape) var(--tw-mask-radial-size) at var(--tw-mask-radial-position), var(--tw-mask-radial-from-color) var(--tw-mask-radial-from-position), var(--tw-mask-radial-to-color) var(--tw-mask-radial-to-position);-]
+[-    --tw-mask-radial: radial-gradient(var(--tw-mask-radial-stops));-]
+[-    --tw-mask-radial-to-position: calc(var(--spacing) * 100);-]
+[-  }-]
+  .mask-radial-to-100\% {
+    mask-image: var(--tw-mask-linear), var(--tw-mask-radial), var(--tw-mask-conic);
+    mask-composite: intersect;
+@@ -2318,18 +2249,6 @@
+      fill: white !important;
+    }
+  }
+[-  .apexcharts-gridline {-]
+[-    stroke: var(--color-gray-200) !important;-]
+[-    .dark & {-]
+[-      stroke: var(--color-gray-700) !important;-]
+[-    }-]
+[-  }-]
+[-  .apexcharts-xcrosshairs {-]
+[-    stroke: var(--color-gray-200) !important;-]
+[-    .dark & {-]
+[-      stroke: var(--color-gray-700) !important;-]
+[-    }-]
+[-  }-]
+  .apexcharts-ycrosshairs {
+    stroke: var(--color-gray-200) !important;
+    .dark & {
+@@ -2358,9 +2277,6 @@
+  .p-1\.5 {
+    padding: calc(var(--spacing) * 1.5);
+  }
+[-  .p-2 {-]
+[-    padding: calc(var(--spacing) * 2);-]
+[-  }-]
+  .p-2\.5 {
+    padding: calc(var(--spacing) * 2.5);
+  }
+@@ -2696,10 +2612,6 @@
+    -webkit-backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
+    backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
+  }
+[-  .backdrop-filter {-]
+[-    -webkit-backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);-]
+[-    backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);-]
+[-  }-]
+  .transition {
+    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, content-visibility, overlay, pointer-events;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+@@ -3073,14 +2985,6 @@
+      border-color: transparent;
+    }
+  }
+[-  .dark\:bg-black\/30 {-]
+[-    @media (prefers-color-scheme: dark) {-]
+[-      background-color: color-mix(in srgb, #000000 30%, transparent);-]
+[-      @supports (color: color-mix(in lab, red, red)) {-]
+[-        background-color: color-mix(in oklab, var(--color-black) 30%, transparent);-]
+[-      }-]
+[-    }-]
+[-  }-]
+  .dark\:bg-blue-600 {
+    @media (prefers-color-scheme: dark) {
+      background-color: var(--color-blue-600);

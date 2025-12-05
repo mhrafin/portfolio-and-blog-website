@@ -1,7 +1,7 @@
 -include .env
 
 PY?=
-PELICAN?=pelican
+PELICAN?=pipenv run pelican
 PELICANOPTS=
 
 BASEDIR=$(CURDIR)
@@ -9,6 +9,9 @@ INPUTDIR=$(BASEDIR)/content
 OUTPUTDIR=$(BASEDIR)/output
 CONFFILE=$(BASEDIR)/pelicanconf.py
 PUBLISHCONF=$(BASEDIR)/publishconf.py
+
+TAILWIND_INPUT=theme/static/css/input.css
+TAILWIND_OUTPUT=theme/static/css/output.css
 
 S3BUCKET ?= your.s3.bucket
 OBSIDIANBUCKET ?= your.obsidian.bucket
@@ -45,36 +48,44 @@ help:
 	@echo '   make serve-global [SERVER=0.0.0.0]  serve (as root) to $(SERVER):80    '
 	@echo '   make devserver [PORT=8000]          serve and regenerate together      '
 	@echo '   make devserver-global               regenerate and serve on 0.0.0.0    '
+	@echo '   make build-css                      build tailwind css                 '
+	@echo '   make watch-css                      watch tailwind css for changes     '
+	@echo '   make sync-to-aws                    sync output and content to S3      '
+	@echo '   make sync-content-from-aws          sync content from S3               '
 	@echo '                                                                          '
 	@echo 'Set the DEBUG variable to 1 to enable debugging, e.g. make DEBUG=1 html   '
 	@echo 'Set the RELATIVE variable to 1 to enable relative urls                    '
 	@echo '                                                                          '
 
-html:
-	"$(PELICAN)" "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(CONFFILE)" $(PELICANOPTS)
+html: build-css
+	$(PELICAN) "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(CONFFILE)" $(PELICANOPTS)
 
 clean:
 	[ ! -d "$(OUTPUTDIR)" ] || rm -rf "$(OUTPUTDIR)"
 
 regenerate:
-	"$(PELICAN)" -r "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(CONFFILE)" $(PELICANOPTS)
+	$(PELICAN) -r "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(CONFFILE)" $(PELICANOPTS)
 
 serve:
-	"$(PELICAN)" -l "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(CONFFILE)" $(PELICANOPTS)
+	$(PELICAN) -l "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(CONFFILE)" $(PELICANOPTS)
 
 serve-global:
-	"$(PELICAN)" -l "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(CONFFILE)" $(PELICANOPTS) -b $(SERVER)
+	$(PELICAN) -l "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(CONFFILE)" $(PELICANOPTS) -b $(SERVER)
 
 devserver:
-	"$(PELICAN)" -lr "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(CONFFILE)" $(PELICANOPTS)
+	$(PELICAN) -lr "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(CONFFILE)" $(PELICANOPTS)
 
 devserver-global:
-	"$(PELICAN)" -lr "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(CONFFILE)" $(PELICANOPTS) -b 0.0.0.0
+	$(PELICAN) -lr "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(CONFFILE)" $(PELICANOPTS) -b 0.0.0.0
 
-publish:
-	"$(PELICAN)" "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(PUBLISHCONF)" $(PELICANOPTS)
+publish: build-css
+	$(PELICAN) "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(PUBLISHCONF)" $(PELICANOPTS)
 
+build-css:
+	npx @tailwindcss/cli -i $(TAILWIND_INPUT) -o $(TAILWIND_OUTPUT) --compat
 
+watch-css:
+	npx @tailwindcss/cli -i $(TAILWIND_INPUT) -o $(TAILWIND_OUTPUT) --compat --watch
 
 sync-to-aws:	
 	aws s3 sync output/ s3://$(S3BUCKET)/ --delete --profile $(AWSPROFILE)
@@ -83,8 +94,4 @@ sync-to-aws:
 sync-content-from-aws:
 	aws s3 sync s3://$(OBSIDIANBUCKET)/content/ content/ --profile $(AWSPROFILE)
 
-tailwind-css:
-	npx @tailwindcss/cli -i theme/static/css/input.css -o theme/static/css/output.css --compat --watch
-
-
-.PHONY: html help clean regenerate serve serve-global devserver devserver-global publish 
+.PHONY: html help clean regenerate serve serve-global devserver devserver-global publish build-css watch-css sync-to-aws sync-content-from-aws

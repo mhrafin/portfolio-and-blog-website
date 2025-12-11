@@ -14,10 +14,10 @@
 </style>
 {% endblock style %} {% block nav %}
 
-<nav class="fixed w-full top-0 left-0 z-50 backdrop-blur-lg bg-surf-container-lowest/30 border-b border-surface">
+<nav class="fixed w-full top-0 left-0 z-50 backdrop-blur-lg bg-bg/30 border-b border-accent/20">
   <div class="mx-auto flex items-center justify-between p-4">
     <!-- Logo -->
-    <div class="text-white font-bold pl-6 md:pl-21">Raf</div>
+    <div class="text-text font-bold pl-6 md:pl-21">Raf</div>
 
     <!-- Button -->
     <!-- <a href="blog/index.html" class="pr-6 md:pr-21"><button
@@ -26,20 +26,20 @@
             Blogs
           </button></a> -->
     <a href="{{ INDEX_SAVE_AS }}"
-      class="mr-6 md:mr-21 text-on-primary bg-primary hover:bg-primary/80 font-medium rounded-lg text-sm px-5 py-2.5">
+      class="mr-6 md:mr-21 text-bg bg-accent hover:bg-accent/80 font-medium rounded-lg text-sm px-5 py-2.5">
       Blogs
     </a>
   </div>
 </nav>
 
 {% endblock nav %} {% block content %}
-<section id="hero" class="relative h-screen flex items-center justify-center bg-black pb-12">
+<section id="hero" class="relative h-screen flex items-center justify-center bg-bg pb-12">
   <!-- Background image -->
   <div class="absolute inset-0 bg-cover bg-[20%_20%] bg-[url(/static/images/portfolio-bg.jpg)]">
-    <div class="absolute inset-0 pointer-events-none bg-surface mask-radial-at-right mask-radial-to-100%"></div>
-    <div class="absolute inset-0 pointer-events-none bg-surface mask-radial-at-bottom-right mask-radial-from-30%"></div>
-    <div class="absolute inset-0 pointer-events-none bg-surface mask-r-to-25%"></div>
-    <div class="absolute inset-0 pointer-events-none bg-surface mask-t-to-25%"></div>
+    <div class="absolute inset-0 pointer-events-none bg-bg mask-radial-at-right mask-radial-to-100%"></div>
+    <div class="absolute inset-0 pointer-events-none bg-bg mask-radial-at-bottom-right mask-radial-from-30%"></div>
+    <div class="absolute inset-0 pointer-events-none bg-bg mask-r-to-25%"></div>
+    <div class="absolute inset-0 pointer-events-none bg-bg mask-t-to-25%"></div>
   </div>
 
   <!-- Dark overlay -->
@@ -50,14 +50,13 @@
     <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-4">
       Mahedi Hassan Rafin
     </h1>
-    <p x-data="typedEffect()" x-init="start()" class="text-2xl text-gray-200">
+    <p x-data="typedEffect()" x-init="start()" class="text-2xl text-text/80">
       I'm a
-      <span x-text="current" class="text-on-surface-var decoration-primary-400"></span><span
-        class="animate-blink">|</span>
+      <span x-text="current" class="text-accent decoration-accent"></span><span class="animate-blink">|</span>
     </p>
 
     <!-- Social Links -->
-    <div class="flex justify-end mt-6 text-white">
+    <div class="flex justify-end mt-6 text-text">
       <a href="https://github.com/mhrafin" class="mx-1">
         <svg class="w-[21px] h-[21px] md:w-[28px] md:h-[28px] lg:w-[33px] lg:h-[33px]" aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -75,7 +74,7 @@
           <path d="M7.2 8.809H4V19.5h3.2V8.809Z" />
         </svg>
       </a>
-      <a href="#" class="hover:text-primary-400">
+      <a href="#" class="hover:text-accent">
         <i class="bi bi-instagram text-2xl"></i>
       </a>
       <a href="#" class="hover:text-primary-400">
@@ -84,8 +83,8 @@
     </div>
   </div>
 </section>
-<section class="max-w-6xl mx-auto px-6 py-12 pt-24 text-persian-red">
-  <h2 class="text-5xl font-extrabold text-on-surface">
+<section class="max-w-6xl mx-auto px-6 py-12 pt-24 text-accent">
+  <h2 class="text-5xl font-extrabold text-text">
     Who Am I?
   </h2>
   <p>
@@ -98,7 +97,7 @@
   <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
     {# If your generator already sorts articles newest-first, articles[:3] is
     fine. #} {% for article in articles[:3] %}
-    <article class="bg-white/5 p-4 rounded-lg shadow-sm">
+    <article class="bg-accent/10 p-4 rounded-lg shadow-sm">
       <a href="/blog/{{ article.url }}" class="block">
         <h3 class="text-lg font-bold mb-2">{{ article.title }}</h3>
       </a>
@@ -111,7 +110,7 @@
         #} {{ article.summary | no_img | safe }}
       </p>
       <a href="/blog/{{ article.url }}"
-        class="inline-block text-sm font-medium hover:underline hover:decoration-persian-red">
+        class="inline-block text-sm font-medium hover:underline hover:decoration-accent">
         Read →
       </a>
     </article>

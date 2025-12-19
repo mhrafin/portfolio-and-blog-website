@@ -19,16 +19,17 @@
     <!-- Logo -->
     <div class="text-text font-bold pl-6 md:pl-21">Raf</div>
 
-    <!-- Button -->
-    <!-- <a href="blog/index.html" class="pr-6 md:pr-21"><button
-            type="button"
-            class="text-gray-900 hover:text-white border border-gray-800  focus:ring-1 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:focus:ring-gray-800 ">
-            Blogs
-          </button></a> -->
-    <a href="{{ INDEX_SAVE_AS }}"
-      class="mr-6 md:mr-21 text-bg bg-accent hover:bg-accent/80 font-medium rounded-lg text-sm px-5 py-2.5">
-      Blogs
-    </a>
+    <!-- Navigation Links -->
+    <div class="flex gap-4 mr-6 md:mr-21">
+      <a href="/pages/contact.html"
+        class="text-text border border-accent/50 hover:bg-accent/20 font-medium rounded-lg text-sm px-5 py-2.5 transition-colors duration-200">
+        Contact
+      </a>
+      <a href="{{ INDEX_SAVE_AS }}"
+        class="text-bg bg-accent hover:bg-accent/80 font-medium rounded-lg text-sm px-5 py-2.5 transition-colors duration-200">
+        Blogs
+      </a>
+    </div>
   </div>
 </nav>
 
@@ -136,7 +137,7 @@
 <script>
   function typedEffect() {
     return {
-      words: ["Muslim", "Software Engineer", "ML Enthusiast"],
+      words: ["Muslim", "Software Engineer", "Hobbyist Writer"],
       current: "",
       i: 0,
       j: 0,

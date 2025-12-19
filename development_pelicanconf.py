@@ -14,7 +14,7 @@ JINJA_FILTERS ={"wrap_images": wrap_images,
 
 AUTHOR = 'Mahedi Hassan Rafin'
 SITENAME = 'Raf'
-SITEURL = "https://mhrafin.dev"
+SITEURL = "http://localhost:8000"
 
 
 TIMEZONE = 'Europe/Rome'

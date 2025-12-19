@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+{% block tailwind_n_flowbite %}
+<link href="../static/css/output.css" rel="stylesheet" />
+{% endblock tailwind_n_flowbite %}
+{% if page.description %}
+<meta name="description" content="{{ page.description }}" />
+{% endif %}
+{% endblock head %}
+
+{% block content %}
+<section class="ml-5 md:ml-29 mr-5 md:mr-29">
+    <div class="rounded-lg bg-accent/10 p-6 md:p-10">
+        <div>
+            <h1 class="text-4xl md:text-5xl font-extrabold tracking-wide mb-6 underline decoration-accent text-left">
+                {{ page.title }}
+            </h1>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mt-10">
+            <!-- Contact Info (Markdown Content) -->
+            <div class="prose prose-invert prose-lg max-w-none">
+                {{ page.content | safe }}
+            </div>
+
+            <!-- Contact Form -->
+            <div>
+                <h2 class="text-2xl font-semibold mb-6">Contact Form</h2>
+                <form action="https://formsubmit.co/array.raf@gmail.com" method="POST" class="space-y-6">
+                    <!-- FormSubmit Configuration -->
+                    <input type="hidden" name="_next" value="{{ SITEURL }}/pages/thank-you.html">
+                    <input type="hidden" name="_subject" value="Reaching out from mhrafin.dev">
+                    <input type="text" name="_honey" style="display:none">
+                    <input type="hidden" name="_captcha" value="true">
+
+                    <div>
+                        <label for="name" class="block mb-2 text-sm font-medium text-text">Your Name</label>
+                        <input type="text" id="name" name="name"
+                            class="bg-bg/50 border border-accent/50 text-text text-sm rounded-lg focus:ring-accent focus:border-accent block w-full p-2.5"
+                            placeholder="John Doe" required>
+                    </div>
+                    <div>
+                        <label for="email" class="block mb-2 text-sm font-medium text-text">Your Email</label>
+                        <input type="email" id="email" name="email"
+                            class="bg-bg/50 border border-accent/50 text-text text-sm rounded-lg focus:ring-accent focus:border-accent block w-full p-2.5"
+                            placeholder="name@example.com" required>
+                    </div>
+                    <div>
+                        <label for="message" class="block mb-2 text-sm font-medium text-text">Your Message</label>
+                        <textarea id="message" name="message" rows="4"
+                            class="block p-2.5 w-full text-sm text-text bg-bg/50 rounded-lg border border-accent/50 focus:ring-accent focus:border-accent"
+                            placeholder="Write your thoughts here..." required></textarea>
+                    </div>
+                    <button type="submit"
+                        class="text-bg bg-accent hover:bg-accent/80 focus:ring-4 focus:outline-none focus:ring-accent/50 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Send
+                        Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

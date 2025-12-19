@@ -28,6 +28,28 @@ The main configuration file is `pelicanconf.py`.
     }
     ```
 
+-   **`PLUGINS`**: List of enabled Pelican plugins.
+    -   `sitemap` - Generates an XML sitemap for SEO
+
+### Sitemap Configuration
+
+-   **`SITEMAP`**: Configuration for the sitemap plugin.
+    ```python
+    SITEMAP = {
+        'format': 'xml',
+        'priorities': {
+            'articles': 0.7,
+            'indexes': 0.5,
+            'pages': 0.6
+        },
+        'changefreqs': {
+            'articles': 'monthly',
+            'indexes': 'weekly',
+            'pages': 'monthly'
+        }
+    }
+    ```
+
 ## Exclusions
 
 -   **`PAGE_EXCLUDES`** & **`ARTICLE_EXCLUDES`**: Directories to ignore (e.g., `templates`, `.obsidian`).

@@ -6,6 +6,9 @@ name = "pypi"
 [packages]
 pelican = {extras = ["markdown"], version = "*"}
 beautifulsoup4 = "*"
+rclone = "*"
+s3cmd = "*"
+pelican-sitemap = "*"
 
 [dev-packages]
 

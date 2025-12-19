@@ -8,6 +8,7 @@ BASEDIR=$(CURDIR)
 INPUTDIR=$(BASEDIR)/content
 OUTPUTDIR=$(BASEDIR)/output
 CONFFILE=$(BASEDIR)/pelicanconf.py
+DEVELOPMENT_CONFFILE=$(BASEDIR)/development_pelicanconf.py
 
 TAILWIND_INPUT=theme/static/css/input.css
 TAILWIND_OUTPUT=theme/static/css/output.css
@@ -73,10 +74,10 @@ serve-global:
 	$(PELICAN) -l "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(CONFFILE)" $(PELICANOPTS) -b $(SERVER)
 
 devserver:
-	$(PELICAN) -lr "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(CONFFILE)" $(PELICANOPTS)
+	$(PELICAN) -lr "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(DEVELOPMENT_CONFFILE)" $(PELICANOPTS)
 
 devserver-global:
-	$(PELICAN) -lr "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(CONFFILE)" $(PELICANOPTS) -b 0.0.0.0
+	$(PELICAN) -lr "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(DEVELOPMENT_CONFFILE)" $(PELICANOPTS) -b 0.0.0.0
 
 
 build-css:
@@ -86,7 +87,9 @@ watch-css:
 	npx @tailwindcss/cli -i $(TAILWIND_INPUT) -o $(TAILWIND_OUTPUT) --compat --watch
 
 sync-output:
-	aws s3 sync output/ s3://$(S3BUCKET)/ --delete --profile $(AWSPROFILE)
+# 	aws s3 sync output/ s3://$(S3BUCKET)/ --delete --profile $(AWSPROFILE)
+# 	aws s3 sync output/ s3://$(S3BUCKET)/ --delete --size-only --profile $(AWSPROFILE)
+	pipenv run s3cmd sync --delete-removed --check-md5 output/ s3://$(S3BUCKET)/
 
 sync-content:
 	aws s3 sync content/ s3://$(OBSIDIANBUCKET)/content/ --delete --profile $(AWSPROFILE)

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+{% block tailwind_n_flowbite %}
+<link href="../static/css/output.css" rel="stylesheet" />
+{% endblock tailwind_n_flowbite %}
+{% if page.description %}
+<meta name="description" content="{{ page.description }}" />
+{% endif %}
+{% endblock head %}
+
+{% block content %}
+<section class="ml-5 md:ml-29 mr-5 md:mr-29">
+    <div class="rounded-lg bg-accent/10 p-6 md:p-10">
+        <div class="md:m-10 mt-10">
+            <h1 class="text-4xl md:text-5xl font-extrabold tracking-wide mb-6 underline decoration-accent text-left">
+                {{ page.title }}
+            </h1>
+        </div>
+        <div class="md:m-10 mt-10">
+            <div class="p-[2px] mb-6 rounded-xl bg-accent"></div>
+            <div class="prose prose-invert prose-lg max-w-none">
+                {{ page.content | safe }}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

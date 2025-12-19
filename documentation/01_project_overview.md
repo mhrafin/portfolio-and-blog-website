@@ -44,3 +44,4 @@ This project is a static website generated using **Pelican**, a Python-based sta
 -   **Custom Theme**: Built from scratch using TailwindCSS.
 -   **Obsidian Integration**: Content structure is designed to work with Obsidian, syncing via AWS S3.
 -   **Automated Build**: Makefile handles CSS compilation and site generation.
+-   **SEO Optimization**: Automatic sitemap generation for improved search engine indexing.

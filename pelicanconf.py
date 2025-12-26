@@ -12,6 +12,23 @@ from no_img import no_img
 JINJA_FILTERS ={"wrap_images": wrap_images,
                 "no_img": no_img} 
 
+
+MARKDOWN = {
+    'extensions': [
+        'markdown.extensions.codehilite',
+        'markdown.extensions.extra',
+        'markdown.extensions.meta',
+        'pymdownx.mark',
+    ],
+    'extension_configs': {
+        'markdown.extensions.codehilite': {'css_class': 'highlight'},
+        'markdown.extensions.extra': {},
+        'markdown.extensions.meta': {},
+        'pymdownx.mark': {},
+    },
+    'output_format': 'html5',
+}
+
 AUTHOR = 'Mahedi Hassan Rafin'
 SITENAME = 'Raf'
 SITEURL = "https://mhrafin.dev"

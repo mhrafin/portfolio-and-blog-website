@@ -3443,7 +3443,7 @@
     }
   }
 }
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wdth,wght@0,75..100,100..700;1,75..100,100..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wdth,wght@0,75..100,100..700;1,75..100,100..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 body {
   font-family: 'Inter', sans-serif;
   font-weight: 400;
@@ -3455,6 +3455,89 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   letter-spacing: -0.02em;
   margin: 1.2em 0 0.6em;
+}
+@layer components {
+  .article-content>p:first-of-type::first-letter {
+    float: left;
+    font-size: var(--text-7xl);
+    line-height: var(--tw-leading, var(--text-7xl--line-height));
+    --tw-font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+    line-height: 0.8;
+    margin-right: 0.1em;
+    margin-top: 0.1em;
+    margin-bottom: 0;
+    padding-top: 0;
+  }
+  .article-content h1 {
+    margin-top: calc(var(--spacing) * 14);
+    margin-bottom: calc(var(--spacing) * 8);
+    font-size: var(--text-4xl);
+    line-height: var(--tw-leading, var(--text-4xl--line-height));
+    --tw-font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+  }
+  .article-content h2 {
+    margin-top: calc(var(--spacing) * 12);
+    margin-bottom: calc(var(--spacing) * 6);
+    font-size: var(--text-3xl);
+    line-height: var(--tw-leading, var(--text-3xl--line-height));
+    --tw-font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+  }
+  .article-content h3 {
+    margin-top: calc(var(--spacing) * 10);
+    margin-bottom: calc(var(--spacing) * 4);
+    font-size: var(--text-2xl);
+    line-height: var(--tw-leading, var(--text-2xl--line-height));
+    --tw-font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-semibold);
+    color: color-mix(in srgb, #f4e3b7 90%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      color: color-mix(in oklab, var(--color-text) 90%, transparent);
+    }
+  }
+  .article-content h4 {
+    margin-top: calc(var(--spacing) * 8);
+    margin-bottom: calc(var(--spacing) * 4);
+    font-size: var(--text-xl);
+    line-height: var(--tw-leading, var(--text-xl--line-height));
+    --tw-font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-medium);
+    color: color-mix(in srgb, #f4e3b7 80%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      color: color-mix(in oklab, var(--color-text) 80%, transparent);
+    }
+  }
+  .article-content ul, .article-content ol {
+    margin-block: calc(var(--spacing) * 6);
+    margin-left: calc(var(--spacing) * 6);
+    list-style-position: outside;
+  }
+  .article-content ul {
+    list-style-type: disc;
+  }
+  .article-content ol {
+    list-style-type: decimal;
+  }
+  .article-content p {
+    margin-bottom: calc(var(--spacing) * 6);
+  }
+  .article-content blockquote {
+    margin-block: calc(var(--spacing) * 8);
+    border-left-style: var(--tw-border-style);
+    border-left-width: 4px;
+    border-color: var(--color-accent);
+    padding-left: calc(var(--spacing) * 4);
+    color: color-mix(in srgb, #f4e3b7 80%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      color: color-mix(in oklab, var(--color-text) 80%, transparent);
+    }
+    font-style: italic;
+  }
 }
 @layer base {
   .tooltip-arrow,.tooltip-arrow:before {

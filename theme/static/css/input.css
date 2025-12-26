@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @import "flowbite/src/themes/default";
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wdth,wght@0,75..100,100..700;1,75..100,100..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wdth,wght@0,75..100,100..700;1,75..100,100..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
 @plugin "flowbite/plugin";
 
@@ -41,3 +41,56 @@ h6 {
   font-size: 0.875rem; 
   text-transform: uppercase; 
 } */
+
+@layer components {
+  .article-content>p:first-of-type::first-letter {
+    @apply float-left text-7xl font-bold text-text;
+    /* font-family: 'Playfair Display', serif; */
+    line-height: 0.8;
+    /* Tighter line-height to minimize box height differences */
+    margin-right: 0.1em;
+    /* Standard spacing */
+    margin-top: 0.1em;
+    /* Slight positive margin to align cap-heights visually */
+    margin-bottom: 0;
+    /* Reset */
+    padding-top: 0;
+  }
+
+  .article-content h1 {
+    @apply text-4xl font-bold mt-14 mb-8 text-text;
+  }
+
+  .article-content h2 {
+    @apply text-3xl font-bold mt-12 mb-6 text-text;
+  }
+
+  .article-content h3 {
+    @apply text-2xl font-semibold mt-10 mb-4 text-text/90;
+  }
+
+  .article-content h4 {
+    @apply text-xl font-medium mt-8 mb-4 text-text/80;
+  }
+
+  .article-content ul,
+  .article-content ol {
+    @apply my-6 ml-6 list-outside;
+  }
+
+  .article-content ul {
+    @apply list-disc;
+  }
+
+  .article-content ol {
+    @apply list-decimal;
+  }
+
+  .article-content p {
+    @apply mb-6;
+  }
+
+  .article-content blockquote {
+    @apply border-l-4 border-accent pl-4 italic text-text/80 my-8;
+  }
+}

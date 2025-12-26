@@ -3108,6 +3108,11 @@
       inset: calc(var(--spacing) * 0);
     }
   }
+  .md\:m-4 {
+    @media (width >= 48rem) {
+      margin: calc(var(--spacing) * 4);
+    }
+  }
   .md\:m-8 {
     @media (width >= 48rem) {
       margin: calc(var(--spacing) * 8);
@@ -3116,6 +3121,11 @@
   .md\:m-10 {
     @media (width >= 48rem) {
       margin: calc(var(--spacing) * 10);
+    }
+  }
+  .md\:mx-29 {
+    @media (width >= 48rem) {
+      margin-inline: calc(var(--spacing) * 29);
     }
   }
   .md\:mr-21 {
@@ -3186,6 +3196,11 @@
   .md\:gap-12 {
     @media (width >= 48rem) {
       gap: calc(var(--spacing) * 12);
+    }
+  }
+  .md\:p-6 {
+    @media (width >= 48rem) {
+      padding: calc(var(--spacing) * 6);
     }
   }
   .md\:p-8 {

@@ -99,7 +99,7 @@
     {# If your generator already sorts articles newest-first, articles[:3] is
     fine. #} {% for article in articles[:3] %}
     <article class="bg-accent/10 p-4 rounded-lg shadow-sm">
-      <a href="/blog/{{ article.url }}" class="block">
+      <a href="{{ article.url }}" class="block">
         <h3 class="text-lg font-bold mb-2">{{ article.title }}</h3>
       </a>
       <p class="text-xs text-gray-400 mb-3">
@@ -110,8 +110,7 @@
         {# Some generators provide article.summary or article.metadata.summary
         #} {{ article.summary | no_img | safe }}
       </p>
-      <a href="/blog/{{ article.url }}"
-        class="inline-block text-sm font-medium hover:underline hover:decoration-accent">
+      <a href="{{ article.url }}" class="inline-block text-sm font-medium hover:underline hover:decoration-accent">
         Read →
       </a>
     </article>

@@ -89,7 +89,9 @@ watch-css:
 sync-output:
 # 	aws s3 sync output/ s3://$(S3BUCKET)/ --delete --profile $(AWSPROFILE)
 # 	aws s3 sync output/ s3://$(S3BUCKET)/ --delete --size-only --profile $(AWSPROFILE)
-	pipenv run s3cmd sync --delete-removed --check-md5 output/ s3://$(S3BUCKET)/
+# 	pipenv run s3cmd sync --delete-removed --check-md5 output/ s3://$(S3BUCKET)/
+	pipenv run s3cmd sync --delete-removed --check-md5 output/ s3://mhrafin.dev/
+	pipenv run s3cmd put --mime-type="text/css" output/static/css/*.css s3://mhrafin.dev/static/css/
 
 sync-content:
 	aws s3 sync content/ s3://$(OBSIDIANBUCKET)/content/ --delete --profile $(AWSPROFILE)

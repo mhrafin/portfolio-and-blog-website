@@ -16,6 +16,18 @@ AUTHOR = 'Mahedi Hassan Rafin'
 SITENAME = 'Raf'
 SITEURL = "https://mhrafin.dev"
 
+# Tell Pelican where to find content
+PATH = 'content'
+
+# Ignore template files and other non-content files
+IGNORE_FILES = [
+    '.#*',
+    '__pycache__',
+    '*.pyc',
+    '.DS_Store',
+    '.obsidian',
+    'templates/*',  # Ignore template directory entirely
+]
 
 TIMEZONE = 'Europe/Rome'
 
@@ -66,10 +78,12 @@ THEME_STATIC_DIR = 'static'
 THEME_STATIC_PATHS = ['static']
 
 INDEX_SAVE_AS = 'blogs.html'
+ARTICLE_URL = 'blog/{slug}.html'
 ARTICLE_SAVE_AS = 'blog/{slug}.html'
 
 TEMPLATE_PAGES = {
     'portfolio.html': 'index.html',  # your custom landing page
+    '404.html': '404.html',  # custom 404 page
 }
 
 # Cache settings for improved build performance

@@ -1,15 +1,5 @@
 {% extends "base.html" %}
 
-{% block head %}
-{{ super() }}
-{% block tailwind_n_flowbite %}
-<link href="../static/css/output.css" rel="stylesheet" />
-{% endblock tailwind_n_flowbite %}
-{% if page.description %}
-<meta name="description" content="{{ page.description }}" />
-{% endif %}
-{% endblock head %}
-
 {% block content %}
 <section class="ml-5 md:ml-29 mr-5 md:mr-29">
     <div class="rounded-lg bg-accent/10 p-6 md:p-10">
@@ -48,6 +38,12 @@
                             placeholder="name@example.com" required>
                     </div>
                     <div>
+                        <label for="subject" class="block mb-2 text-sm font-medium text-text">Subject</label>
+                        <input type="text" id="subject" name="subject"
+                            class="bg-bg/50 border border-accent/50 text-text text-sm rounded-lg focus:ring-accent focus:border-accent block w-full p-2.5"
+                            placeholder="Briefly describe your inquiry" required>
+                    </div>
+                    <div>
                         <label for="message" class="block mb-2 text-sm font-medium text-text">Your Message</label>
                         <textarea id="message" name="message" rows="4"
                             class="block p-2.5 w-full text-sm text-text bg-bg/50 rounded-lg border border-accent/50 focus:ring-accent focus:border-accent"
@@ -62,3 +58,20 @@
     </div>
 </section>
 {% endblock content %}
+
+{% block script %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.querySelector('form');
+        const subjectInput = document.getElementById('subject');
+        const hiddenSubject = document.querySelector('input[name="_subject"]');
+        const initialSubjectValue = hiddenSubject.value;
+
+        form.addEventListener('submit', function (e) {
+            if (subjectInput.value.trim()) {
+                hiddenSubject.value = initialSubjectValue + " : " + subjectInput.value.trim();
+            }
+        });
+    });
+</script>
+{% endblock script %}

@@ -2,9 +2,6 @@
 
 {% block head %}
 {{ super() }}
-{% block tailwind_n_flowbite %}
-<link href="../static/css/output.css" rel="stylesheet" />
-{% endblock tailwind_n_flowbite %}
 {% if page.description %}
 <meta name="description" content="{{ page.description }}" />
 {% endif %}

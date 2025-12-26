@@ -66,10 +66,12 @@ THEME_STATIC_DIR = 'static'
 THEME_STATIC_PATHS = ['static']
 
 INDEX_SAVE_AS = 'blogs.html'
+ARTICLE_URL = 'blog/{slug}.html'
 ARTICLE_SAVE_AS = 'blog/{slug}.html'
 
 TEMPLATE_PAGES = {
     'portfolio.html': 'index.html',  # your custom landing page
+    '404.html': '404.html',  # custom 404 page
 }
 
 # Cache settings for improved build performance

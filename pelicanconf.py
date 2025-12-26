@@ -93,7 +93,7 @@ CHECK_MODIFIED_METHOD = 'mtime'
 CONTENT_CACHING_LAYER = 'reader'
 
 # Sitemap plugin configuration
-PLUGINS = ['sitemap']
+PLUGINS = ['sitemap', 'readtime']
 
 SITEMAP = {
     'format': 'xml',

@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "6cb56358ccb01703a6da8e18aeff3f323580d1a3a292bd30f2734ba9243861f4"
+            "sha256": "297fe3c3483a75d38007ccd46815b5dbd49638b2ad46fae5aca29133cb99f660"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -217,6 +217,14 @@
             ],
             "markers": "python_version >= '3.9' and python_version < '4.0'",
             "version": "==4.11.0.post0"
+        },
+        "pelican-readtime": {
+            "hashes": [
+                "sha256:22497c9dc83554f188d13af6a362d023b2c6e811af703553d99dfc404c52feec",
+                "sha256:d83fda594e05ba53ade767d1d702b79f2b1074a2f09eda69380b1ea32b71598a"
+            ],
+            "index": "pypi",
+            "version": "==0.2.1"
         },
         "pelican-sitemap": {
             "hashes": [

@@ -7,8 +7,7 @@ article.description %}
 <section class="ml-5 md:ml-29 mr-5 md:mr-29">
   <div class="rounded-lg bg-accent/10 p-6">
     <div>
-      <h1
-        class="text-4xl md:text-5xl font-extrabold tracking-wide mb-6 underline decoration-accent text-left">
+      <h1 class="text-4xl md:text-5xl font-extrabold tracking-wide mb-6 underline decoration-accent text-left">
         {{ article.title }}
       </h1>
       <p class="text-xs italic m-2">
@@ -16,11 +15,13 @@ article.description %}
         <time datetime="{{ article.date.isoformat() }}">
           {{ article.locale_date }}
         </time>
+        {% if article.readtime is defined %}
+        <span class="mx-2 text-accent">·</span>
+        <span>{{ article.readtime if article.readtime > 0 else 1 }} min read</span>
+        {% endif %}
       </p>
       {% if article.coverimage %}
-      <img
-        class="w-full h-full max-h-150 aspect-auto object-cover rounded-[18px]"
-        src="{{ article.coverimage }}"
+      <img class="w-full h-full max-h-150 aspect-auto object-cover rounded-[18px]" src="{{ article.coverimage }}"
         alt="{{ article.title }}" />
       {% else %} {% endif %}
     </div>

@@ -58,39 +58,17 @@ article.description %}
         alt="{{ article.title }}" />
       {% else %} {% endif %}
     </div>
-    <div class="md:m-20 mt-20">
-      <div class="p-[2px] mb-6 rounded-xl bg-accent"></div>
-      {{ article.content | wrap_images | safe }}
-      <!-- <footer>
-        <p></p>
-        {% if article.modified %}
-        <p>
-          Last updated:
-          <time datetime="{{ article.modified.isoformat() }}">
-            {{ article.locale_modified }}
-          </time>
-        </p>
-        {% endif %} {% if article.authors %}
-        <address>
-          By {% for author in article.authors %}
-          <a href="{{ SITEURL }}/{{ author.url }}">{{ author }}</a>
-          {% endfor %}
-        </address>
-        {% endif %} {% if article.category %}
-        <p>
-          Category:
-          <a href="{{ SITEURL }}/{{ article.category.url }}"
-            >{{ article.category }}</a
-          >
-        </p>
-        {% endif %} {% if article.tags %}
-        <p>
-          Tags: {% for tag in article.tags %}
-          <a href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a>
-          {% endfor %}
-        </p>
-        {% endif %}
-      </footer> -->
+    <div class="max-w-6xl mx-auto mt-12 mb-20">
+      <!-- Thin separator -->
+      <div class="h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent mb-8"></div>
+
+      <!-- Content Container -->
+      <div
+        class="relative bg-gradient-to-br from-white/5 to-transparent p-6 md:p-10 rounded-2xl shadow-xl ring-1 ring-white/10 backdrop-blur-sm">
+        <div class="text-lg leading-loose tracking-wide text-text/90">
+          {{ article.content | wrap_images | safe }}
+        </div>
+      </div>
     </div>
   </div>
 </section>

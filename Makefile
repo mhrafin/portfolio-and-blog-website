@@ -94,11 +94,11 @@ sync-output:
 	pipenv run s3cmd put --mime-type="text/css" output/static/css/*.css s3://$(S3BUCKET)/static/css/
 
 sync-content:
-	aws s3 sync content/ s3://$(OBSIDIANBUCKET)/content/ --delete --profile $(AWSPROFILE)
+	pipenv run s3cmd sync --delete-removed --check-md5 content/ s3://$(OBSIDIANBUCKET)/content/
 
 sync-to-aws: sync-output sync-content
 
 sync-content-from-aws:
-	aws s3 sync s3://$(OBSIDIANBUCKET)/content/ content/ --profile $(AWSPROFILE)
+	pipenv run s3cmd sync s3://$(OBSIDIANBUCKET)/content/ content/
 
 .PHONY: html help clean regenerate serve serve-global devserver devserver-global build-css watch-css sync-to-aws sync-output sync-content sync-content-from-aws

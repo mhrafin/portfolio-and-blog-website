@@ -10,22 +10,40 @@ Generates the static site in the `output/` directory. This also automatically bu
 make html
 ```
 
-### Serve Locally
-Builds the site and serves it at `http://localhost:8000`.
-```bash
-make serve
-```
-
-### Development Server (Auto-reload)
-Builds, serves, and watches for changes (both content and theme) to regenerate automatically.
-```bash
-make devserver
-```
-
 ### Clean Output
 Removes the `output/` directory.
 ```bash
 make clean
+```
+
+### Regenerate on File Changes
+Watches for changes and regenerates files automatically.
+```bash
+make regenerate
+```
+
+### Serve Locally
+Builds and serves the site at `http://localhost:8000` with live reload.
+```bash
+make serve
+```
+
+### Serve Globally
+Serves the site accessible on your network.
+```bash
+make serve-global
+```
+
+### Development Server
+Development mode with auto-reload for both content and theme changes. Uses `development_pelicanconf.py`.
+```bash
+make devserver
+```
+
+### Development Server (Global)
+Development server accessible on your network.
+```bash
+make devserver-global
 ```
 
 ### Build CSS
@@ -61,8 +79,20 @@ Article content goes here...
 
 ## Syncing Content
 
-### Sync to AWS
-Syncs the `output/` directory to the configured S3 bucket for the website, and `content/` to the Obsidian backup bucket.
+### Sync Output to AWS
+Syncs the `output/` directory to the configured S3 bucket using s3cmd with MD5 checksums.
+```bash
+make sync-output
+```
+
+### Sync Content to AWS
+Syncs content to the Obsidian backup bucket.
+```bash
+make sync-content
+```
+
+### Sync All to AWS
+Syncs both the output and content to AWS S3.
 ```bash
 make sync-to-aws
 ```

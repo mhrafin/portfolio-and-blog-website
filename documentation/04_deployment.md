@@ -33,7 +33,25 @@ To deploy the site to production:
     make sync-to-aws
     ```
     This command:
-    -   Syncs `output/` to `s3://$(S3BUCKET)/`.
+    -   Syncs `output/` to S3 using `s3cmd` with MD5 checksum verification.
+    -   Explicitly sets MIME type for CSS files to ensure proper delivery.
     -   Syncs `content/` to `s3://$(OBSIDIANBUCKET)/content/` (for backup/Obsidian sync).
 
-    *Note: The command uses `--delete`, so files removed locally will be removed from the bucket.*
+    *Note: The command uses `--delete-removed`, so files removed locally will be removed from the bucket.*
+
+### Individual Sync Commands
+
+**Sync only output to production:**
+```bash
+make sync-output
+```
+
+**Sync only content to backup:**
+```bash
+make sync-content
+```
+
+**Sync content from S3 to local:**
+```bash
+make sync-content-from-aws
+```

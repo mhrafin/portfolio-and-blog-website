@@ -27,12 +27,26 @@ Ensure you have the following installed on your system:
     ```bash
     pipenv install
     ```
+    
+    This installs the following packages:
+    - `pelican[markdown]` - Static site generator with Markdown support
+    - `beautifulsoup4` - HTML parsing library
+    - `rclone` - Cloud storage sync tool
+    - `s3cmd` - S3 command-line tool
+    - `pelican-sitemap` - Sitemap plugin
+    - `pelican-readtime` - Reading time estimation plugin
+    - `pymdown-extensions` - Additional Markdown extensions
 
 3.  **Install Node.js Dependencies**:
     Install TailwindCSS and other frontend tools:
     ```bash
     npm install
     ```
+    
+    This installs:
+    - `@tailwindcss/cli@^4.1.13` - TailwindCSS v4 CLI
+    - `tailwindcss@^4.1.13` - TailwindCSS core
+    - `flowbite@^3.1.2` - UI component library
 
 4.  **Environment Variables**:
     Create a `.env` file in the root directory if needed (referenced in `Makefile`).

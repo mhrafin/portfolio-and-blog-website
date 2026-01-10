@@ -1,5 +1,7 @@
 # Configuration
 
+[← Back to Documentation Index](01_project_overview.md)
+
 The main configuration file is `pelicanconf.py`.
 
 ## Key Settings

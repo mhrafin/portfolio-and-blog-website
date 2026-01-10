@@ -1,5 +1,7 @@
 # Theme and Customization
 
+[← Back to Documentation Index](01_project_overview.md)
+
 The project uses a custom Pelican theme located in the `theme/` directory.
 
 ## Theme Structure

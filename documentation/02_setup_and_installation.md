@@ -1,5 +1,7 @@
 # Setup and Installation
 
+[← Back to Documentation Index](01_project_overview.md)
+
 Follow these steps to set up the project locally.
 
 ## Prerequisites

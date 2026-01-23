@@ -1643,6 +1643,9 @@
   .max-w-6xl {
     max-width: var(--container-6xl);
   }
+  .max-w-7xl {
+    max-width: var(--container-7xl);
+  }
   .max-w-full {
     max-width: 100%;
   }
@@ -3213,6 +3216,11 @@
       padding: calc(var(--spacing) * 10);
     }
   }
+  .md\:pr-12 {
+    @media (width >= 48rem) {
+      padding-right: calc(var(--spacing) * 12);
+    }
+  }
   .md\:pr-21 {
     @media (width >= 48rem) {
       padding-right: calc(var(--spacing) * 21);
@@ -3221,6 +3229,11 @@
   .md\:pr-24 {
     @media (width >= 48rem) {
       padding-right: calc(var(--spacing) * 24);
+    }
+  }
+  .md\:pl-12 {
+    @media (width >= 48rem) {
+      padding-left: calc(var(--spacing) * 12);
     }
   }
   .md\:pl-21 {

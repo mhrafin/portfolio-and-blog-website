@@ -31,7 +31,8 @@ MARKDOWN = {
 
 AUTHOR = 'Mahedi Hassan Rafin'
 SITENAME = 'Raf'
-SITEURL = "https://mhrafin.dev"
+SITEURL = ""  # Empty for development, set in publishconf.py for production
+RELATIVE_URLS = True  # Use relative URLs for local development
 
 # Tell Pelican where to find content
 PATH = 'content'
@@ -50,7 +51,7 @@ TIMEZONE = 'Europe/Rome'
 
 DEFAULT_LANG = 'en'
 
-# Feed generation is usually not desired when developing
+# Feed generation is disabled for development
 FEED_ALL_ATOM = None
 CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
@@ -79,7 +80,8 @@ STATIC_PATHS = ['images', 'extra']
 EXTRA_PATH_METADATA = {
     'extra/favicon.ico': {'path': 'favicon.ico'},
     'extra/robots.txt': {'path': 'robots.txt'},
-    'extra/googleaeadac67107de018.html': {'path': 'googleaeadac67107de018.html'}
+    'extra/googleaeadac67107de018.html': {'path': 'googleaeadac67107de018.html'},
+    'extra/resume.pdf': {'path': 'resume.pdf'}
 }
 
 
@@ -103,11 +105,14 @@ TEMPLATE_PAGES = {
     '404.html': '404.html',  # custom 404 page
 }
 
-# Cache settings for improved build performance
+# Cache settings for improved build performance (development)
 CACHE_CONTENT = True
 LOAD_CONTENT_CACHE = True
 CHECK_MODIFIED_METHOD = 'mtime'
 CONTENT_CACHING_LAYER = 'reader'
+
+# Delete output directory on rebuild (disabled for development)
+DELETE_OUTPUT_DIRECTORY = False
 
 # Sitemap plugin configuration
 PLUGINS = ['sitemap', 'readtime']
